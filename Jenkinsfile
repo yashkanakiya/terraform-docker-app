@@ -21,16 +21,18 @@ pipeline {
         }
         stage('Frontend') {
             steps {
-                node.js('node-yash-version')
-                sh 'npm install'
+                node.js('node-yash-version') {
+                sh 'npm install'           
+                }
                 echo 'FRONTEND....'
                 // Add deployment commands here
             }
         }
         stage('Backend') {
             steps {
-                withGradle('test-gradle')
+                withGradle('test-gradle') {
                 sh './gradlew -v'
+                }
                 echo 'BACKEND....'
                 // Add deployment commands here
             }
